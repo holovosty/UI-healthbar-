@@ -9,6 +9,7 @@ public class SliderValueChanger : MonoBehaviour
     private Slider _slider;
     private Health _health;
     private WaitForSeconds _waitingTime = new WaitForSeconds(0.01f);
+
     private const float _healthFadeRate = 1;
 
     private void Start()

@@ -8,10 +8,7 @@ public class PlayerAnimator : MonoBehaviour
     private Animator _player;
     private Health _health;
 
-    private const string _heal = "Heal";
-    private const string _takeDamage = "TakeDamage";
-    private const string _death = "Death";
-
+    private const string _heal = "Heal", _takeDamage = "TakeDamage", _death = "Death";
 
     private void Start()
     {
