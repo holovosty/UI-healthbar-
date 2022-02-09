@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86251bdd0d461fa41ab7a9c69f66fe33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentValue: 0
 --- !u!114 &221460539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,7 +1113,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1238,8 +1237,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1717268637}
-        m_TargetAssemblyTypeName: SliderValueChanger, Assembly-CSharp
-        m_MethodName: ChangeValue
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: ShowCurrentHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1395,8 +1394,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1717268637}
-        m_TargetAssemblyTypeName: SliderValueChanger, Assembly-CSharp
-        m_MethodName: ChangeValue
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: ShowCurrentHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float CurrentValue;
+    public float CurrentValue { get; private set; }
+    public bool IsAlive { get; private set; }
 
-    public const float MinValue = 0, MaxValue = 100, Delta = 10;
+    private const float MinValue = 0, MaxValue = 100, Delta = 10;
 
     private void Start()
     {
@@ -13,17 +14,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (CurrentValue >= Delta && CurrentValue > MinValue)
-            CurrentValue -= Delta;
-        else if (CurrentValue < Delta && CurrentValue > MinValue)
-            CurrentValue = MinValue;
+        CurrentValue = Mathf.Clamp(CurrentValue - Delta, MinValue, MaxValue);
+
+        IsAlive = CurrentValue > MinValue;
     }
 
     public void Heal()
     {
-        if (CurrentValue <= (MaxValue - Delta) && CurrentValue > MinValue)
-            CurrentValue += Delta;
-        else if (CurrentValue >= (MaxValue - Delta) && CurrentValue < MaxValue && CurrentValue > MinValue)
-            CurrentValue = MaxValue;
+        if (IsAlive)
+            CurrentValue = Mathf.Clamp(CurrentValue + Delta, MinValue, MaxValue);
     }
 }
