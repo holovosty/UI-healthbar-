@@ -17,22 +17,27 @@ public class HealthBar : MonoBehaviour
         _health = GetComponentInParent<Health>();
         _slider = GetComponent<Slider>();
 
-        _slider.value = _health.CurrentValue;
+        _slider.value = Health.MaxValue;
+        
+        _health.ChangedValue += SetCurrentHealth;
     }
 
-    private IEnumerator SmoothChange()
+    private void OnDisable()
     {
-        float targetValue = _health.CurrentValue;
+        _health.ChangedValue -= SetCurrentHealth;
+    }
 
-        while (_slider.value != targetValue)
+    private IEnumerator SmoothChange(float currentHealth)
+    {
+        while (_slider.value != currentHealth)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, targetValue, HealthFadeRate);
+            _slider.value = Mathf.MoveTowards(_slider.value, currentHealth, HealthFadeRate);
             yield return _waitingTime;
         }
     }
 
-    public void ShowCurrentHealth()
+    public void SetCurrentHealth(float currentHealth)
     {
-        StartCoroutine(SmoothChange());
+        StartCoroutine(SmoothChange(currentHealth));
     }
 }

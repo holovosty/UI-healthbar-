@@ -1,27 +1,41 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    public float CurrentValue { get; private set; }
-    public bool IsAlive { get; private set; }
+    private UnityEvent<float> _changedValue = new UnityEvent<float>();
 
-    private const float MinValue = 0, MaxValue = 100, Delta = 10;
+    public event UnityAction<float> ChangedValue
+    {
+        add => _changedValue.AddListener(value);
+        remove => _changedValue.RemoveListener(value);
+    }
+
+    public bool IsAlive => _currentValue > MinValue;
+    public const float MaxValue = 100;
+
+    private float _currentValue;
+    private const float MinValue = 0;
+    private const float Delta = 10;
 
     private void Start()
     {
-        CurrentValue = MaxValue;
+        _currentValue = MaxValue;
     }
 
     public void TakeDamage()
     {
-        CurrentValue = Mathf.Clamp(CurrentValue - Delta, MinValue, MaxValue);
+        _currentValue = Mathf.Clamp(_currentValue - Delta, MinValue, MaxValue);
 
-        IsAlive = CurrentValue > MinValue;
+        _changedValue.Invoke(_currentValue);
     }
 
     public void Heal()
     {
         if (IsAlive)
-            CurrentValue = Mathf.Clamp(CurrentValue + Delta, MinValue, MaxValue);
+            _currentValue = Mathf.Clamp(_currentValue + Delta, MinValue, MaxValue);
+
+        _changedValue.Invoke(_currentValue);
     }
 }
